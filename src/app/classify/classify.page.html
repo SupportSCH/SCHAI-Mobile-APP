@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Classify AI</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item hidden>
+    <ion-label>Choose the Category</ion-label>
+    <ion-select [(ngModel)]="choices" #mySelect (ionChange)="ionChange()">
+      <ion-select-option *ngFor="let folder of folder_name_array">{{folder.folder}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- <ion-card class="header-card"> -->
+  <h4>{{status_text}}</h4>
+  <!-- </ion-card> -->
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="selectImage()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <img src="assets/upload.jpg" *ngIf="!image">
+        <img [src]="image" *ngIf="image">
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+
+    <ion-col col-12 *ngIf="!UploadStatus && image">
+      <ion-button expand="full" (click)="startUpload()">Upload to Classify</ion-button>
+    </ion-col>
+
+    <ion-col col-6 *ngIf="UploadStatus">
+      <ion-button expand="full" (click)="refresh()">Correct</ion-button>
+    </ion-col>
+
+    <ion-col col-6 *ngIf="UploadStatus">
+      <ion-button expand="full" (click)="openSelect()">Wrong</ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

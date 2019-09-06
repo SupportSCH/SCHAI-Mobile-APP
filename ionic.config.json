@@ -1,0 +1,7 @@
+{
+  "name": "ImgUpload",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
